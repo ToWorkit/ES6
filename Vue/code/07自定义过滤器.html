@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div class="box">
+    {{msg | toDo('1','2')}}
+</div>
+<script>
+    Vue.filter("toDo",function (n,a,b) {    //自定义过滤器还可以用
+        alert(a+','+b);
+        return n < 10 ? "0" + n : n;
+    });
+    new Vue({
+        el: '.box',
+        data: {
+            msg: 6
+        }
+    });
+</script>
+</body>
+</html>

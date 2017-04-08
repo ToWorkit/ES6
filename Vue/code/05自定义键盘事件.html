@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+
+    </style>
+    <script src="lib/vue.js"></script>
+
+</head>
+<body>
+<div id="box">
+    <input type="text" @keydown.ctrl="alt"> <!--up存在bug-->
+</div>
+<script>
+    //Vue.directive('on').keyCodes.ctrl=17;
+    Vue.config.keyCodes.ctrl = 17;
+
+    new Vue({
+        el: '#box',
+        data: {},
+        methods: {
+            change(){
+                alert('改变了');
+            },
+            alt(){
+                alert(1);
+            }
+        }
+    });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

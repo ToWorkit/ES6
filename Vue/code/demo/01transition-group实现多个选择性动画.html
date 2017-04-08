@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/vue.js"></script>
+    <link rel="stylesheet" href="../lib/animate.css">
+    <style>
+        p {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 5px auto;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="text" v-model="show">
+    <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+        <p class="animated" v-show="show" v-for="(val, index) in listS" :key="index">{{val}}</p>
+    </transition-group>
+</div>
+<script>
+    new Vue({
+        el: '.box',
+        data: {
+            show:'',
+            list: ["app","spa",'iife','mvc','mvvm']
+        },
+        computed: { //计算属性,写代码的
+            listS(){
+                var arr = [];
+                var _this = this;
+                this.list.forEach(function (val) {
+                    if(val.indexOf(_this.show) != -1){
+                        arr.push(val);
+                    }
+                }); //也可以给函数大括号的后面加 .bind(this)改变this指向
+                return arr;
+            }
+        }
+    });
+</script>
+</body>
+</html>

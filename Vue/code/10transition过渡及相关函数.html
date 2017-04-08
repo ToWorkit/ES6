@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+    <style>
+        p {
+            width: 200px;
+            height: 200px;
+            background: darkred;
+        }
+        /*过渡属性要写在active中*/
+        .fades-enter-active, .fades-leave-active {
+            transition: all 1s;
+        }
+
+        /*过渡过程 从无到有*/
+        .fades-enter-active {
+            opacity: 1;
+            width: 200px;
+            height: 200px;
+        }
+        /*过渡过程 从有到无*/
+        .fades-leave-active {
+            opacity: 0;
+            width: 100px;
+            height: 100px;
+        }
+        /*初始状态，leave可以省略*/
+        .fades-enter,.fades-leave {
+            opacity: 0;
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="button" value="点击显示隐藏" @click="show=!show">  <!--点击改变元素，也可以这样用-->
+        <!--写在过渡标签中-->
+        <transition name="fades"
+            @before-enter="beforeEnter"
+            @enter = "enter"
+            @after-enter = 'afterEnter'
+            @before-leave = 'beforeLeave'
+            @leave = 'leave'
+            @after-leave = 'afterLeave'
+        > <!--得有name,名称和过渡样式的开头要相同-->
+            <p v-show="show"></p>
+        </transition>
+    </div>
+<script>
+    var vm = new Vue({
+        data: {
+            show: true
+        },
+        methods: {
+            beforeEnter(el){
+                console.log(el);
+                console.log('动画进入之前');
+            },
+            enter(el){
+                console.log('动画进入');
+            },
+            afterEnter(el){
+                console.log("动画进入之后");
+                el.style.background = 'skyblue';
+            },
+            beforeLeave(el){
+                console.log('动画离开之前');
+            },
+            leave(el){
+                console.log('动画离开');
+            },
+            afterLeave(el){
+                console.log('动画离开之后');
+                el.style.background = 'green'
+            }
+        }
+    }).$mount('.box');
+</script>
+</body>
+</html>

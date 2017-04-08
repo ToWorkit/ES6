@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<!--系统自带的过滤器都去掉了-->
+<div class="box">
+    {{msg}}     <!--自动转换为json-->
+</div>
+<script>
+    new Vue({
+        data: {
+            msg: {
+                a: 1,
+                b: 2,
+                c: 3
+            }
+        },
+        methods: {
+            ck(){
+                alert(1);
+            }
+        }
+    }).$mount(".box");
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="lib/animate.css">
+    <script src="lib/vue.js"></script>
+    <style>
+        p {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <input type="button" value="点击" @click="show= !show">
+        <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+            <p v-show="show" class="animated"></p>
+        </transition>
+    </div>
+<script>
+    new Vue({
+        el: '.box',
+        data: {
+            show: false
+        }
+    });
+</script>
+</body>
+</html>

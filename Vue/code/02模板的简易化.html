@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div class="box">
+    {{msg}}
+    <m-a></m-a>
+</div>
+<template id="a">
+    <h2>好</h2>
+</template>
+<script>
+    var Home = {
+        template: '#a'
+    };
+    //挂在全局
+    // Vue.component("m-a",Home);
+
+    new Vue({
+      el: ".box",
+      data: {
+          msg: "2.0"
+      }
+      ,    //挂在局部
+      components: {
+          "m-a": Home
+      }
+    });
+</script>
+</body>
+</html>

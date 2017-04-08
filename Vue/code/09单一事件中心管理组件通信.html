@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+    <div class="box">
+        <com-a></com-a>
+        <com-b></com-b>
+        <com-c></com-c>
+    </div>
+<script>
+    //定义全局的空实例对象
+    var Event = new Vue();
+
+    var A = {
+        //es6 中字符串拼接
+        template: `
+            <div>
+                <span>我是A组件</span>  ---{{a}}
+                <input type="button" value="把A的数据给c" @click="send">
+            </div>
+        `,
+        data(){
+            return {
+                a: 'a数据'
+            }
+        },
+        methods: {
+            send(){
+                Event.$emit("a-msg",this.a); //将数据发送全局
+            }
+        }
+    };
+    var B = {
+        template: `
+            <div>
+                <span>我是B组件</span> ---{{b}}
+                <input type="button" value="把B的数据给c" @click="send">
+            </div>
+        `,
+        data(){
+            return {
+                b : 'b数据'
+            }
+        },
+        methods: {
+            send(){
+                Event.$emit("b-msg",this.b);//将数据发送全局
+            }
+        }
+    };
+    var C = {
+        template:  `
+            <div>
+                <h3>c组件</h3>
+                <span>接收过来A的数据: {{a}}</span>
+                <br>
+                <span>接收过来B的数据: {{b}}</span>
+            </div>
+        `,
+        data(){
+            return {
+                a:'',
+                b:''
+            }
+        },
+        mounted(){  //编译完成后接收数据
+//            var _this = this;
+            Event.$on('a-msg',function (a) {
+                this.a = a; //this 的指向会出现问题
+            }.bind(this));  //等同于上面的，注意要绑给函数（改变this指向为外层this）
+
+            Event.$on('b-msg',function (b) {
+                this.b = b;
+            }.bind(this));
+        }
+    };
+    new Vue({
+        el: '.box',
+        components:{
+            'com-a': A,
+            'com-b': B,
+            'com-c': C
+        }
+    });
+</script>
+</body>
+</html>

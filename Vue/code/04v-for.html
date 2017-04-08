@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+</head>
+<body>
+<div class="box">
+    <input type="button" value="添加" @click="add">  <!--track-by="index"  变成了:key='index'-->
+    <ul>
+        <li v-for="(val, index) in arr" :key="index">   <!--:key 为了提升性能-->
+            {{val}} {{index}}   <!--不再使用隐式的写法了,且可以重复添加-->
+        </li>
+    </ul>
+    <hr>
+    <ul>
+        <li v-for="(val, key) in json">
+            {{val}} {{key}} <!--同样去掉了隐式写法，都改为显示-->
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        data: {
+            arr: ['a','b','c'],
+            json: {
+                a:'A',
+                b:'B',
+                c:'C'
+            }
+        },
+        methods: {
+            add(){
+                this.arr.push('d');
+            }
+        }
+    }).$mount('.box');
+</script>
+</body>
+</html>

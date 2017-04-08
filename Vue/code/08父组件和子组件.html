@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="lib/vue.js"></script>
+    <script>
+        window.onload = function () {
+            new Vue({
+                el: '.box',
+                data: {
+                    a: '父级组件'
+                },
+                components: {
+                    'child-com': {
+                        data(){
+                            return {
+                                b:''
+                            }
+                        },
+                        props:['msg'],  //访问父级元素
+                        template: '#child',
+                        mouted(){   //编译完成后，用来做中转
+                            this.b = this.msg
+                        },
+                        methods: {
+                            change(){
+                                this.b = '改了'
+                            }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</head>
+<body>
+
+<template id="child">
+    <div>
+        <span>子级</span>
+        <input type="button" value="按钮" @click="change">
+        <strong>{{b}}</strong>
+    </div>
+</template>
+
+<div class="box">
+    <p>父级: {{a}}</p>
+    <child-com :msg="a"></child-com>
+</div>
+
+<script>
+
+
+</script>
+</body>
+</html>
