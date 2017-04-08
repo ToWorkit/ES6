@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../lib/browser.js"></script>
+</head>
+<body>
+
+<script>
+  class Fn {
+    constructor(x,y){
+        this.x = x;
+        this.y = y;
+    }
+    init(){
+        this.log();
+    }
+    log(){
+      console.log(this.x);
+      this.sum();
+    }
+    sum(){
+      console.log(this.x + this.y);
+    }
+    number(){
+      return 12;
+    }
+  }
+  let fn = new Fn(1,2);
+  fn.init();
+  console.dir(fn);
+
+  class fn1 extends Fn{ //fn1继承自Fn
+    constructor(x,y,superNum){
+      super(x,y);
+      this.superNum = superNum;
+    }
+    number(){
+      return super.number() + this.superNum;
+    }
+  }
+  let f = new fn1(2,3,34);
+  console.log(f.number());  //46
+</script>
+</body>
+</html>

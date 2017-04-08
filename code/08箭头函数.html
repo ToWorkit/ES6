@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../lib/browser.js"></script>
+</head>
+<body>
+
+<script>
+  var a = g => g * g;
+//  function a(g){
+//    return g*g
+//  }
+  console.log(a(2));    //4
+
+
+    /*面试题*/
+    var fn = function(){alert(1)};
+    function fn() {
+      alert(2);
+    }
+//    fn();   //1
+
+    var a = 1;
+    function a() {
+      alert(4);
+    }
+//    a(); //is not a function
+
+
+    f = (x,y) => (x+y);
+    console.log(f(1, 2));
+
+    let fn1 = (a,b) => ({A:a,B:b});
+//  Object
+  //   A: 1B: 2__proto__: Object
+    console.log(fn1(1,2));
+
+    var obj = {
+      render: x => x(a)
+    }
+    console.dir(obj);
+    //就是这种方式
+    render = (function(x){
+      return x(a);
+    });
+</script>
+</body>
+</html>

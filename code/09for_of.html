@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<ul id="todo-app">
+		<li class="item">1 item</li>
+		<li class="item">2 item</li>
+		<li class="item">3 item</li>
+		<li class="item">4 item</li>
+	</ul>
+	<script>
+		//内容加载之后触发事件绑定
+/*		document.addEventListener('DOMContentLoaded',function() {
+			let app = document.getElementById('todo-app');
+			let items = app.getElementsByClassName('item');
+			for(let item of items){
+				item.addEventListener('click',function() {
+					alert("点击了" + item.innerHTML);
+				});
+			}
+		});
+*/
+		//真正意义上的事件委托（支持多个输入事项）
+		document.addEventListener('DOMContentLoaded',function() {
+			let app = document.getElementById('todo-app');
+			//直接将事件监听绑定到当前父级元素上监控整个子级
+			app.addEventListener('click',function(e) {
+				e = e || window.event;
+				if(e.target && e.target.nodeName === 'LI'){
+					let item = e.target;
+					alert('当前点击的是' + item.innerHTML);
+				}
+			});
+		});
+	</script>
+</body>
+</html>
