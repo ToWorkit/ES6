@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../lib/browser.js"></script>
+</head>
+<body>
+
+<script>
+    //字符串会被解析为类数组
+    const[a,b,c,d,e] = "我是个好人";
+    console.log(a);
+    console.log(b);
+    console.log(c);
+    console.log(d);
+    console.log(e);
+    //类数组也是有长度的
+    let{length: len} = "hello";
+    console.log(len);
+</script>
+</body>
+</html>
