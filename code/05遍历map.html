@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script src="../lib/browser.js"></script>
+</head>
+<body>
+
+<script>
+  var map = new Map();
+  map.set('1','2');
+  map.set('3','4');
+  for(let [key, value] of map){
+    console.log(key + '-' + value);
+  }
+  for(let [,value] of map){
+    console.log(value);
+  }
+</script>
+</body>
+</html>
