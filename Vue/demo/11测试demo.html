@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <style>
+        .now {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <h1 :class="{now: b == c}">你好,世界</h1>
+    </div>
+<script>
+  new Vue({
+    data(){
+      return {
+        b: 1,
+        c: 1
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>

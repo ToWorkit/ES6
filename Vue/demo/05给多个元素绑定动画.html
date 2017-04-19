@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+<style>
+    p {
+        width: 100px;
+        height: 100px;
+        margin: 5px auto;
+        background: red;
+    }
+</style>
+<body>
+    <div class="box">
+        <button @click="flag = !flag" v-text="txt"></button>
+        <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+            <p v-for="(value, index) in arrP" :key="index" v-show="flag" class="animated"></p>
+        </transition-group>
+    </div>
+<script>
+  new Vue({
+    data(){
+      return {
+        flag: true,
+        txt: '多个动画',
+        arrP: ['1','2']
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>

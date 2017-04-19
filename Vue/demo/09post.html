@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <script src="lib/vue-resource.js"></script>
+</head>
+<body>
+    <div class="box">
+        <input type="button" value="post请求" @click="post">
+    </div>
+<script>
+  new Vue({
+    data() {
+      return {
+        a: 4,
+        b: 2
+      }
+    },
+    methods: {
+      post(){
+        this.$http.post('09post.php',{a: this.a,b: this.b},{emulateJSON: true}).then((res)=>console.log(res.data),(res)=>alert(res.status))
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>

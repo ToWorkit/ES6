@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+<style>
+    p {
+        width: 100px;
+        height: 100px;
+        margin: 5px auto;
+        background: red;
+    }
+</style>
+<body>
+    <div class="box">
+        <input type="text" v-model="msg">
+        <h1>{{msg}}</h1>
+        <transition-group enter-active-class="zoomInLeft" leave-active-class="zoomOutRight">
+            <p class="animated" v-for="(value, index) in arrS" :key="index" v-text="value"></p>
+        </transition-group>
+    </div>
+<script>
+  new Vue({
+    data(){
+      return {
+        msg: '',
+        arr: ['a','b','ac']
+      }
+    },
+    computed: {
+      arrS(){
+        let arrt = [];
+//        let that = this;
+        this.arr.forEach(function (val) {
+          if(val.indexOf(this.msg) != -1 && this.msg != ''){
+            arrt.push(val)
+          }
+        }.bind(this))
+        return arrt
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>

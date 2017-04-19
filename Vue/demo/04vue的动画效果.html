@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <link rel="stylesheet" href="lib/animate.css">
+</head>
+    <style>
+        .box {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto;
+        }
+        .target {
+            width: 100px;
+            height: 100px;
+            background: red;
+            margin-top: 30px;
+        }
+        button {
+            margin-left: 25px;
+        }
+        .zoomInLeft { /*动画开始的颜色*/
+            background: #000;
+        }
+        .zoomOutRight { /*动画结束的颜色*/
+            background: #000;
+        }
+    </style>
+<body>
+    <div class="box">
+       <button @click="flag = !flag">动画</button>
+        <br>
+        <!--animate的使用方式-->
+        <!--vue的动画使用 transition-->
+        <transition enter-active-class="zoomInLeft" leave-active-class="zoomOutRight" @after-enter="afterEnter">
+            <div class="target animated" v-show="flag"></div>
+        </transition>
+    </div>
+<script>
+  new Vue({
+    data(){
+      return {
+        flag: false
+      }
+    },
+    methods: {
+      // 注意绑定在transition上的afterEnter不能加括号
+      afterEnter(e){
+        //   动画结束后的最终颜色
+        e.style.backgroundColor = 'green'
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>

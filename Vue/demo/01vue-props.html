@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <child msg='hello'></child>
+        <child nn='hi'></child>
+    </div>
+    <script type="text/javascript">
+        Vue.config.debug = true;
+        //将父级的数据传入子级中，注意顺序
+        Vue.component('child',{
+            props: ['msg','nn'],
+            template: '<span>{{msg}}{{nn}}</span>'
+        });
+        let vm = new Vue({
+
+        }).$mount('#app');
+    </script>
+</body>
+</html>

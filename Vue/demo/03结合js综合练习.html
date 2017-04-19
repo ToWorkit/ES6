@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+</head>
+<body>
+    <div id="example">
+        <ul @click="on" :style="css">
+            <li v-for="(value,key,index) in arr">{{value}}--{{key}}--{{index}}++{{num}}</li>
+        </ul>
+        <button @click="add">加</button>
+        <button @click="cut">减</button>
+    </div>
+<script>
+    let obj = {};
+    let obj1 = {
+      username: 'lisi',
+      age: 12,
+      gender: 'male'
+    };
+//    function extend(des,origin){
+//        for(let key in origin){
+//            des[key] = origin[key]
+//        }
+//    }
+    new Vue({
+        data(){
+          return {
+            arr: obj1,
+            css: {
+              color: 'red'
+            },
+            num: 2
+          }
+        },
+        methods: {
+          on(){
+            alert(1);
+          },
+          add(){
+            if(this.num % 2 == 0){
+              return ++this.num
+            }
+          },
+          cut(){
+            this.num = --this.num
+          }
+        }
+    }).$mount('#example');
+</script>
+</body>
+</html>

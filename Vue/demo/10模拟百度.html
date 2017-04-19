@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <script src="lib/vue-resource.js"></script>
+</head>
+<style>
+    .nowStyle {
+        background-color: deepskyblue;
+    }
+</style>
+<body>
+    <div class="box">
+        <input type="text" placeholder="请输入查询内容" v-model="msg" @keyup="get" @keydown.up.prevent="up" @keydown.down.prevent="down">
+        <button @click="go">查询</button>
+        <br>
+        <h3 v-if="arr.length == 0">暂无数据</h3>
+        <div v-if="arr">
+            <ul>
+                <li v-for="(value, index) in arr" v-text="value" :class="{nowStyle: index == now}"></li>
+            </ul>
+        </div>
+    </div>
+<script>
+  var vu = new Vue({
+    data() {
+      return {
+        msg: '',
+        arr: [],
+        now: -1
+      }
+    },
+    methods: {
+      get(e) {
+        if(e.keyCode == 38 || e.keyCode == 40){
+            return
+        }else if(e.keyCode == 13) {
+            this.go()
+        }
+        this.$http.jsonp('https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',{
+            wd: this.msg
+          },
+          {
+            // 设置和百度返回数据相同的名字,默认是callback，跨域            
+            jsonp: 'cb'
+          }).then((res) => this.arr = res.data.s,() => {})
+      },
+      go() {
+        window.location.href = "https://www.baidu.com/s?wd=" + this.msg
+        this.msg = ''
+        return
+      },
+      up() {
+        (this.now == -1 || this.now == 0) && (this.now = this.arr.length)
+        this.now --
+        this.msg = this.arr[this.now]
+      },
+      down() {
+        this.now ++
+        (this.now == this.arr.length) && (this.now = 0)
+        this.msg = this.arr[this.now]
+      }
+    }
+  }).$mount('.box')
+  let ul = document.getElementsByTagName('ul')[0];
+    ul.addEventListener('mouseover',function (e) {
+      let li = ul.children;
+      for(let i = 0; i < li.length; i ++){
+        li[i].style.backgroundColor = '';
+      }
+      e.target.style.backgroundColor = 'red';
+    });
+  ul.addEventListener('click',function (e) {
+    console.log(vu.msg);
+    e.msg = e.target.innerHTML;
+  });
+</script>
+</body>
+</html>

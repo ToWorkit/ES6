@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue</title>
+    <script type="text/javascript" src="lib/vue.js"></script>
+    <script src="lib/vue-resource.js"></script>
+</head>
+<body>
+    <div class="box">
+        <input type="button" @click="get" value="get请求">
+    </div>
+<script>
+  new Vue({
+    data(){
+      return {
+        a: 2,
+        b: 4
+      }
+    },
+    methods: {
+      get() {
+        this.$http.get('08get.php',{a:this.a,b:this.b}).then((res) => console.log(res.data),function (res) { // 请求失败
+          alert(res.status)
+        });
+      }
+    }
+  }).$mount('.box')
+</script>
+</body>
+</html>
