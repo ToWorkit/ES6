@@ -12,3 +12,14 @@ function greeter(person) {
 }
 var user = new Student("Jane", "M.", "User");
 console.log(greeter(user));
+
+
+/*function test(a, b) {
+  console.log(a, b)
+}
+
+function test(a) {
+  console.log(a)
+}
+
+test(1, 2)*/
